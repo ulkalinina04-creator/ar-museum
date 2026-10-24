@@ -4,10 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AR-музей</title>
-<!-- порядок важен: ядро MindAR -> A-Frame -> компонент MindAR для A-Frame -->
-<script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
 <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
 <style>
   body { margin: 0; overflow: hidden; }
   #hint, #info {
@@ -27,14 +25,13 @@
 
 <!-- Текст экспоната: замените на свой -->
 <div id="info">
-  <h2>Друз Юлий Цезарь (Друз Младший)</h2>
-  <p>Мужской скульптурный портрет, I век н. э.</p>
-  <p>Лунский мрамор (Lunense). Музей MAAM, Гроссето, Италия.</p>
-  <p style="font-size:11px;opacity:.7">3D-скан: CC BY-NC, Sketchfab.</p>
+  <h2>Название экспоната</h2>
+  <p>Период / автор: ...</p>
+  <p>Краткое описание экспоната, историческая справка, материал, размеры.</p>
 </div>
 
 <a-scene
-  mindar-image="imageTargetSrc: ./targets.mind; maxTrack: 1; filterMinCF: 0.0001; filterBeta: 1; missTolerance: 10;"
+  mindar-image="imageTargetSrc: ./targets.mind; maxTrack: 1;"
   color-space="sRGB"
   renderer="colorManagement: true, physicallyCorrectLights"
   vr-mode-ui="enabled: false"
@@ -49,7 +46,7 @@
   <a-entity id="target" mindar-image-target="targetIndex: 0">
     <!-- rotation 90 0 0: ставим модель "стоя" над плоскостью таблички -->
     <a-entity rotation="90 0 0" position="0 0 0.1">
-      <a-gltf-model src="#exhibit" scale="1.5 1.5 1.5"
+      <a-gltf-model src="#exhibit" scale="0.5 0.5 0.5"
         animation="property: rotation; to: 0 360 0; dur: 12000; easing: linear; loop: true">
       </a-gltf-model>
     </a-entity>
