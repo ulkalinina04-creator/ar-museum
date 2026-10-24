@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AR-музей</title>
+<!-- порядок важен: ядро MindAR -> A-Frame -> компонент MindAR для A-Frame -->
+<script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image.prod.js"></script>
 <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-image-aframe.prod.js"></script>
 <style>
   body { margin: 0; overflow: hidden; }
   #hint, #info {
@@ -28,7 +30,7 @@
   <h2>Друз Юлий Цезарь (Друз Младший)</h2>
   <p>Мужской скульптурный портрет, I век н. э.</p>
   <p>Лунский мрамор (Lunense). Музей MAAM, Гроссето, Италия.</p>
-  <p style="font-size:11px;opacity:.7">3D-скан: АВТОР, CC BY-NC, Sketchfab.</p>
+  <p style="font-size:11px;opacity:.7">3D-скан: CC BY-NC, Sketchfab.</p>
 </div>
 
 <a-scene
