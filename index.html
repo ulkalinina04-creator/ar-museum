@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AR-музей</title>
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+<style>
+  body { margin: 0; overflow: hidden; }
+  #hint, #info {
+    position: fixed; left: 0; right: 0; z-index: 10;
+    font-family: Arial, sans-serif; color: #fff;
+    background: rgba(0, 0, 0, .75); padding: 14px 16px;
+  }
+  #hint { top: 0; text-align: center; font-size: 15px; }
+  #info { bottom: 0; display: none; }
+  #info h2 { margin: 0 0 6px; font-size: 20px; }
+  #info p { margin: 0 0 4px; font-size: 15px; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<div id="hint">Наведите камеру на табличку экспоната</div>
+
+<!-- Текст экспоната: замените на свой -->
+<div id="info">
+  <h2>Друз Юлий Цезарь (Друз Младший)</h2>
+  <p>Мужской скульптурный портрет, I век н. э.</p>
+  <p>Лунский мрамор (Lunense). Музей MAAM, Гроссето, Италия.</p>
+  <p style="font-size:11px;opacity:.7">3D-скан: АВТОР, CC BY-NC, Sketchfab.</p>
+</div>
+
+<a-scene
+  mindar-image="imageTargetSrc: ./targets.mind; maxTrack: 1;"
+  color-space="sRGB"
+  renderer="colorManagement: true, physicallyCorrectLights"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false">
+
+  <a-assets>
+    <a-asset-item id="exhibit" src="./exhibit.glb"></a-asset-item>
+  </a-assets>
+
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+  <a-entity id="target" mindar-image-target="targetIndex: 0">
+    <!-- rotation 90 0 0: ставим модель "стоя" над плоскостью таблички -->
+    <a-entity rotation="90 0 0" position="0 0 0.1">
+      <a-gltf-model src="#exhibit" scale="0.5 0.5 0.5"
+        animation="property: rotation; to: 0 360 0; dur: 12000; easing: linear; loop: true">
+      </a-gltf-model>
+    </a-entity>
+  </a-entity>
+</a-scene>
+
+<script>
+  const target = document.getElementById('target');
+  const info = document.getElementById('info');
+  const hint = document.getElementById('hint');
+  target.addEventListener('targetFound', () => {
+    info.style.display = 'block';
+    hint.style.display = 'none';
+  });
+  target.addEventListener('targetLost', () => {
+    info.style.display = 'none';
+    hint.style.display = 'block';
+  });
+</script>
+</body>
+</html>
